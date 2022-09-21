@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\bumiv\OneDrive\Escritorio\mintic_3\Mintic2022\env
+set VIRTUAL_ENV=C:\Users\chech\Desktop\Ciclo3\Repositorio_Ciclo3\env
 
 if not defined PROMPT set PROMPT=$P$G
 
