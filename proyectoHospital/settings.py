@@ -72,7 +72,7 @@ REST_FRAMEWORK = {
     )
 }
 
-AUTH_USER_MODEL = 'appHospital.tbl_persona'
+AUTH_USER_MODEL = 'appHospital.personaModel'
 
 ROOT_URLCONF = 'proyectoHospital.urls'
 
@@ -152,5 +152,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-import django_heroku
-django_heroku.settings(locals())
+#import django_heroku
+#django_heroku.settings(locals())

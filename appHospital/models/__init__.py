@@ -1,9 +1,7 @@
 
-from .familiar import tbl_familiar
-from .historia import tbl_historia
-from .paciente import tbl_paciente
-from .persona import tbl_persona
-from .rol import tbl_rol
-from .signovital import tbl_signovital
+
+from .persona import personaModel
+from .rol import rolModel
+
 
 

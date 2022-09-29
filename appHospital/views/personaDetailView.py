@@ -5,11 +5,11 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.backends import TokenBackend
 from rest_framework.permissions import IsAuthenticated
 
-from appHospital.models.persona import tbl_persona
+from appHospital.models.persona import personaModel
 from appHospital.serializers.personaSerializer import personaSerializer
 
 class personaDetailView(generics.RetrieveAPIView):
-    queryset = tbl_persona.objects.all()
+    queryset = personaModel.objects.all()
     serializer_class = personaSerializer
     permission_classes = (IsAuthenticated,)
 

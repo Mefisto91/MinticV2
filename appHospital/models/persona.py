@@ -4,12 +4,14 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 from django.contrib.auth.hashers import make_password
 
 from mailbox import NoSuchMailboxError
-from .rol import tbl_rol
+from .rol import rolModel
+
 
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
         if not username:
             raise ValueError('El usuario no existe')
+
         user = self.model(username=username)
         user.set_password(password)
         user.save(using=self._db)
@@ -25,14 +27,14 @@ class UserManager(BaseUserManager):
         return user
 
 
-class tbl_persona(AbstractBaseUser, PermissionsMixin):
-    id = models.SmallIntegerField(primary_key=True);
-    usuario = models.CharField('Usuario', max_length = 15, unique=True);
-    contraseña = models.CharField('Contraseña',max_length=15);
+class personaModel(AbstractBaseUser, PermissionsMixin):
+    id = models.AutoField(primary_key=True);
+    username = models.CharField('Username', max_length = 15, unique=True);
+    password = models.CharField('Password',max_length=100);
     nombre = models.CharField('Nombre',max_length=15);
     apellido = models.CharField('Apellido',max_length=15);
     edad = models.SmallIntegerField();
-    id_rol = models.ForeignKey(tbl_rol, on_delete=models.RESTRICT);
+    id_rol = models.ForeignKey(rolModel, on_delete=models.RESTRICT);
 
     def save(self, **kwargs):
         some_salt = 'mMUj0DrIK6vgtdIYepkIxN'
@@ -40,5 +42,5 @@ class tbl_persona(AbstractBaseUser, PermissionsMixin):
         super().save(**kwargs)
 
     objects = UserManager()
-    USERNAME_FIELD = 'usuario'
+    USERNAME_FIELD = 'username'
 
