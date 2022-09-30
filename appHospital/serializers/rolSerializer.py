@@ -10,11 +10,9 @@ class rolSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         rol = rolModel.objects.create(**validated_data)
-        rolModel.objects.create(rol=rol)
         return rol
 
     def to_representation(self, obj):
-        rol = rolModel.objects.get()
-        return{
-            'rol': rol.id
+       return{
+            'rol': obj.rol
         }

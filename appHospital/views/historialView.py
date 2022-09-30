@@ -2,16 +2,14 @@
 from rest_framework import status, views
 from rest_framework.response import Response
 
-from appHospital.serializers.rolSerializer import rolSerializer
+from appHospital.serializers.historialSerializer import historialSerializer
 
-class rolCreateView(views.APIView):
-    
+class historialView(views.APIView):
     def post(self, request, *args, **kwargs):
-        serializer = rolSerializer(data=request.data)
+        serializer = historialSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(status=status.HTTP_201_CREATED)
-
 
 
 

@@ -28,7 +28,7 @@ class UserManager(BaseUserManager):
 
 
 class personaModel(AbstractBaseUser, PermissionsMixin):
-    id = models.AutoField(primary_key=True);
+    id = models.IntegerField(primary_key=True);
     username = models.CharField('Username', max_length = 15, unique=True);
     password = models.CharField('Password',max_length=100);
     nombre = models.CharField('Nombre',max_length=15);

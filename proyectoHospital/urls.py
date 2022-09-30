@@ -22,4 +22,9 @@ urlpatterns = [
     path('refresh/', TokenRefreshView.as_view()),
     path('user/', views.personaCreateView.as_view()),
     path('user/<int:pk>/', views.personaDetailView.as_view()),
+    path('rol/', views.rolCreateView.as_view()),
+    path('familiar/', views.familiarView.as_view()),
+    path('paciente/', views.pacienteView.as_view()),    
+    path('historial/', views.historialView.as_view()),  
+    path('signos/', views.signosView.as_view()),    
 ]
