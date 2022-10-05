@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-n*dzx6s5*%l!r8l^dog44(+8nwub!0wpn=er)-quu8ezg)zxs!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'appHospital',
+    'corsheaders',
 ]
 
 SIMPLE_JWT = {
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 REST_FRAMEWORK = {
@@ -151,6 +153,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CORS_ALLOWED_ORIGINS = [
+"http://localhost:127.0.0.1:8000/",
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 #import django_heroku
 #django_heroku.settings(locals())
