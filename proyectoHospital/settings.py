@@ -153,11 +153,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-"http://localhost:127.0.0.1:8000/",
-]
-
-CORS_ALLOW_ALL_ORIGINS = True
 
 #import django_heroku
 #django_heroku.settings(locals())
