@@ -22,3 +22,5 @@ class personaDetailView(generics.RetrieveAPIView):
             stringResponse = {'detail':'Unauthorized Request'}
             return Response(stringResponse, status=status.HTTP_401_UNAUTHORIZED)
         return super().get(request, *args, **kwargs)
+
+

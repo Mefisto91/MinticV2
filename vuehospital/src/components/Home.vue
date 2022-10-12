@@ -5,7 +5,7 @@
         <h2>Nombre: <span>{{nombre}}</span></h2>
         <h2>Apellido: <span>{{apellido}}</span></h2>
         <h2>Edad: <span>{{edad}}</span></h2>
-        <h2>Rol: <span>{{rol}}</span></h2>
+        <h2>Rol: <span>{{id_rol}}</span></h2>
         <nav>
             <button v-if="!is_auth" v-on:click="logOut" > Salir </button>  
         </nav>
@@ -21,27 +21,71 @@
 
 
 <script>
+    import jwt_decode from "jwt-decode";
+    import axios from 'axios';
+
     export default {
         name: "Home",
+
         data: function(){
             return {
-                id: localStorage.getItem('id') || "none",
-                username: localStorage.getItem('username') || "none",
-                nombre: localStorage.getItem('Nombre') || "none",
-                apellido: localStorage.getItem('apellido') || "none",
-                edad: localStorage.getItem('edad') || "none",
-                rol: localStorage.getItem('rol') || "none",
-            }
-        },
-
-        methods:{
+                id: "",
+                username: "",
+                nombre: "",
+                apellido: "",
+                edad: "",
+                id_rol: "",
+                }
+            },
             
+        methods: {
+            getData: async function () {
+                if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null) {
+                    this.$emit('logOut');
+                    return;
+                }
+                
+                await this.verifyToken();
+                
+                let token = localStorage.getItem("token_access");
+                let userId = jwt_decode(token).user_id.toString();
+                
+                axios.get(`http://127.0.0.1:8000/user/${userId}/`, {headers: {'Authorization': `Bearer ${token}`}})
+                    .then((result) => {
+                        this.id = result.data.id;
+                        this.username = result.data.username;
+                        this.nombre = result.data.nombre;
+                        this.apellido = result.data.apellido;
+                        this.edad = result.data.edad;
+                        this.id_rol = result.data.id_rol;
+            })
+                    .catch(() => {
+                        this.$emit('logOut');
+                    });
+            },
+            
+            verifyToken: function () {
+                return axios.post("http://127.0.0.1:8000/refresh/", {refresh: localStorage.getItem("token_refresh")}, {headers: {}})
+                
+                    .then((result) => {
+                        localStorage.setItem("token_access", result.data.access);
+                    })
+                    
+                    .catch(() => {
+                        this.$emit('logOut');
+                    });
+                },
+
             logOut: function () {
                 localStorage.clear();
                 this.$router.push({ name: "logIn" });
                 this.verifyAuth();
                 },
-            }
+           },
+           
+           created: async function(){
+                this.getData();
+            },
         }
 </script>
 
@@ -83,8 +127,8 @@
         padding: 10px 20px;
         align-items: center;
     }
-
-  .greetings nav button:hover{
+    
+    .greetings nav button:hover{
         color: #48bff7;
         background: #E5E7E9;
         border: 1px solid #E5E7E9;
