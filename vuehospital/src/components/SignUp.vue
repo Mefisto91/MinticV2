@@ -4,19 +4,19 @@
         <div class="container_signUp_user">
             <h2>Registrarse</h2>
             <form v-on:submit.prevent="processSignUp" >
+                <input type="number" v-model="user.id" placeholder="Id">
+                <br>                
                 <input type="text" v-model="user.username" placeholder="Username">
                 <br>
                 <input type="password" v-model="user.password" placeholder="Password">
                 <br>
-                <input type="text" v-model="user.Id" placeholder="Id">
-                <br>                
-                <input type="text" v-model="user.Nombre" placeholder="Nombre">
+                <input type="text" v-model="user.nombre" placeholder="Nombre">
                 <br>
-                <input type="text" v-model="user.Apellido" placeholder="Apellido">
+                <input type="text" v-model="user.apellido" placeholder="Apellido">
                 <br>
-                <input type="text" v-model="user.Edad" placeholder="Edad">
+                <input type="number" v-model="user.edad" placeholder="Edad">
                 <br>                        
-                <input type="text" v-model="user.Rol" placeholder="Rol">
+                <input type="number" v-model="user.id_rol" placeholder="Rol">
                 <br>                        
                 <!--<input type="number" vmodel="
                 user.account.balance" placeholder="Initial Balance">
@@ -42,7 +42,7 @@
                     nombre: "",
                     apellido: "",
                     edad: "",
-                    rol: "",
+                    id_rol: "",
                 }
             }
         },
@@ -53,7 +53,13 @@
             axios.post("http://127.0.0.1:8000/user/", this.user, {headers: {}})
         .then((result) => {
             let dataSignUp = {
+                id: this.user.id,
                 username: this.user.username,
+                password: this.user.password,
+                nombre: this.user.nombre,
+                apellido: this.user.apellido, 
+                edad: this.user.edad,
+                id_rol: this.user.rol,
                 token_access: result.data.access,
                 token_refresh: result.data.refresh,
                 }

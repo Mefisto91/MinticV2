@@ -1,6 +1,11 @@
 <template>
     <div class="greetings">
         <h1>¡Bienvenido <span> {{username}} </span>!</h1>
+        <h2>Id: <span>{{id}}</span></h2>
+        <h2>Nombre: <span>{{nombre}}</span></h2>
+        <h2>Apellido: <span>{{apellido}}</span></h2>
+        <h2>Edad: <span>{{edad}}</span></h2>
+        <h2>Rol: <span>{{rol}}</span></h2>
         <nav>
             <button v-if="!is_auth" v-on:click="logOut" > Salir </button>  
         </nav>
@@ -20,7 +25,12 @@
         name: "Home",
         data: function(){
             return {
-                username: localStorage.getItem('username') || "none"
+                id: localStorage.getItem('id') || "none",
+                username: localStorage.getItem('username') || "none",
+                nombre: localStorage.getItem('Nombre') || "none",
+                apellido: localStorage.getItem('apellido') || "none",
+                edad: localStorage.getItem('edad') || "none",
+                rol: localStorage.getItem('rol') || "none",
             }
         },
 
@@ -40,17 +50,24 @@
     .greetings{
         margin: 0;
         padding: 0%;
-        height: 10vh;
+        display: table;
+        text-align: center;
         width: 100%;
-        min-height: 100px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        height: 2px;
         }
 
     .greetings h1{
-        font-size: 50px;
+        font-size: 60px;
         color: #283747;
+        }
+    
+    .greetings h2{
+        font-size: 40px;
+        color: #283747;
+        display: table;
+        text-align: center;
+        width: 100%;
+        height: 2px;
         }
 
     .greetings span{
@@ -64,6 +81,7 @@
         border: 1px solid #E5E7E9;
         border-radius: 5px;
         padding: 10px 20px;
+        align-items: center;
     }
 
   .greetings nav button:hover{
